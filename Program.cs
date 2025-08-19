@@ -61,6 +61,11 @@ builder.Services.AddSwaggerGen(c =>
     });
 });
 
+builder.WebHost.ConfigureKestrel(options =>
+{
+    options.ListenAnyIP(80);
+});
+
 builder.Services.AddAuthorization();
 
 
