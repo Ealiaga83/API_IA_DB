@@ -51,16 +51,17 @@ namespace API_IA_DB.Conexion
 
         public PostgreSql()
         {
-            // Prioriza variable de entorno en Railway
             var envConnection = Environment.GetEnvironmentVariable("DATABASE_URL");
 
             if (!string.IsNullOrEmpty(envConnection))
             {
-                connectionString = envConnection;
+                var uri = new Uri(envConnection);
+                var userInfo = uri.UserInfo.Split(':');
+
+                connectionString = $"Host={uri.Host};Port={uri.Port};Database={uri.AbsolutePath.TrimStart('/')};Username={userInfo[0]};Password={userInfo[1]};SSL Mode=Require;Trust Server Certificate=true";
             }
             else
             {
-                // Fallback local para desarrollo
                 var config = new ConfigurationBuilder()
                     .SetBasePath(AppContext.BaseDirectory)
                     .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
