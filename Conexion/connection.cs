@@ -39,14 +39,35 @@ namespace API_IA_DB.Conexion
     {
         private readonly string connectionString;
 
+        //public PostgreSql()
+        //{
+        //    var config = new ConfigurationBuilder()
+        //        .SetBasePath(AppContext.BaseDirectory)
+        //        .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+        //        .Build();
+
+        //    connectionString = config.GetConnectionString("PostgreSql");
+        //}
+
         public PostgreSql()
         {
-            var config = new ConfigurationBuilder()
-                .SetBasePath(AppContext.BaseDirectory)
-                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-                .Build();
+            // Prioriza variable de entorno en Railway
+            var envConnection = Environment.GetEnvironmentVariable("DATABASE_URL");
 
-            connectionString = config.GetConnectionString("PostgreSql");
+            if (!string.IsNullOrEmpty(envConnection))
+            {
+                connectionString = envConnection;
+            }
+            else
+            {
+                // Fallback local para desarrollo
+                var config = new ConfigurationBuilder()
+                    .SetBasePath(AppContext.BaseDirectory)
+                    .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+                    .Build();
+
+                connectionString = config.GetConnectionString("PostgreSql");
+            }
         }
 
         public NpgsqlConnection AbrirConexion()
@@ -65,6 +86,4 @@ namespace API_IA_DB.Conexion
             }
         }
     }
-
-
 }
