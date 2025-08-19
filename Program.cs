@@ -61,6 +61,8 @@ builder.Services.AddSwaggerGen(c =>
     });
 });
 
+// para ejecutarlo local debes comentar la linea 66 hasta la 69
+
 builder.WebHost.ConfigureKestrel(options =>
 {
     options.ListenAnyIP(80);
@@ -88,14 +90,22 @@ builder.Logging.AddConsole();
 
 var app = builder.Build();
 
-if (app.Environment.IsDevelopment())
-{
+// solo para entorno de desarrollo
+//if (app.Environment.IsDevelopment())
+//{
+//    app.UseDeveloperExceptionPage();
+//    app.UseSwagger();
+//    app.UseSwaggerUI();
+//}
 
-    app.UseDeveloperExceptionPage();
+//entorno en produccion
+if (app.Environment.IsDevelopment() || app.Environment.IsProduction())
+{
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-app.MapGet("/", () => Results.Ok("🚀 API corriendo correctamente en Railway"));
+
+app.MapGet("/", () => Results.Ok("🚀 API corriendo correctamente en Railway")); // para ejeecutarlo localmente debes comentar esta linea
 app.UseHttpsRedirection();
 app.UseCors("PermitirTodo");
 app.UseMiddleware<ValidarTokenRevocado>();
