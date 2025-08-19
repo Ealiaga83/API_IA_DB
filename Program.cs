@@ -95,7 +95,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
+app.MapGet("/", () => Results.Ok("🚀 API corriendo correctamente en Railway"));
 app.UseHttpsRedirection();
 app.UseCors("PermitirTodo");
 app.UseMiddleware<ValidarTokenRevocado>();
