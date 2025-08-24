@@ -22,15 +22,8 @@ namespace API_IA_DB.Data
             "fn_consulta_factura_por_ruc",
             "fn_consulta_factura_por_identificacion",
             "fn_consulta_factura_por_nombre_comercial",
-            "fn_consulta_factura_con_json_por_ruc",
-            "fn_consulta_facturas_todas"   ,         
+            "fn_consulta_factura_con_json_por_ruc"
         };
-
-        private readonly HashSet<string> funcionesFecha = new()
-        {
-            "fn_consulta_facturas_por_rango"
-        };
-
 
         private readonly HashSet<string> funcionesNumericas = new()
         {
@@ -69,12 +62,7 @@ namespace API_IA_DB.Data
                 {
                     return p.ToString();
                 }
-
-                if (funcionesFecha.Contains(nombreFuncion) && p is DateTime fecha)
-                {
-                    return $"'{fecha:yyyy-MM-dd}'";
-                }
-
+                
                 return $"'{p.ToString().Replace("'", "''")}'";
             }
 
@@ -83,13 +71,6 @@ namespace API_IA_DB.Data
 
             using var cmd = new NpgsqlCommand(query, connection);
             var resultados = new List<Dictionary<string, object>>();
-
-            var resultado = await EjecutarFuncionAsync(
-                "fn_consulta_facturas_por_rango",
-                new DateTime(2025, 01, 01),
-                new DateTime(2025, 08, 07)
-            );
-
 
             using var reader = await cmd.ExecuteReaderAsync();
             while (await reader.ReadAsync())
