@@ -7,7 +7,7 @@ namespace API_IA_DB.Data
     {
         private readonly PostgreSql conn = new PostgreSql();
 
-
+        //Permitir solo funciones especificas para evitar inyeccion SQL
         private readonly HashSet<string> funcionesPermitidas = new()
         {
             "fn_cliente_por_id", "fn_detalle_factura_por_id", "fn_empresa_por_id",
