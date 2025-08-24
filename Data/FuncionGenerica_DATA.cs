@@ -15,7 +15,7 @@ namespace API_IA_DB.Data
             "fn_totales_factura_por_id", "fn_login_user", "fn_user_exists_id", "fn_list_all_users",
             "fn_consulta_factura_por_ruc", "fn_consulta_factura_por_identificacion", 
             "fn_consulta_factura_por_nombre_comercial","fn_consulta_factura_con_json_por_ruc",
-            "fn_consulta_facturas_por_rango", "fn_facturas_todas"
+            "fn_consulta_facturas_por_rango", "fn_consulta_facturas_todas"
         };
 
         private readonly HashSet<string> funcionesTexto = new()
@@ -24,7 +24,7 @@ namespace API_IA_DB.Data
             "fn_consulta_factura_por_identificacion",
             "fn_consulta_factura_por_nombre_comercial",
             "fn_consulta_factura_con_json_por_ruc",
-            "fn_facturas_todas"
+            "fn_consulta_facturas_todas"
         };
 
         private readonly HashSet<string> funcionesFecha = new()

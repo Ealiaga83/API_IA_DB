@@ -363,5 +363,5 @@ MigrationBackup/
 FodyWeavers.xsd
 
 # Ignorar archivos específicos del proyecto
-#Program.cs
-#Conexion/Connection.cs
+Program.cs
+Conexion/Connection.cs
