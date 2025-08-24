@@ -1,4 +1,4 @@
-﻿using API_IA_DB.Conexion;
+using API_IA_DB.Conexion;
 using Npgsql;
 
 namespace API_IA_DB.Data
